@@ -6,7 +6,11 @@ object DM: TDM
   Height = 433
   Width = 653
   object Conexao: TIBDatabase
-    DatabaseName = ':E:\Delphi\DB\cadastros.gdb'
+    Connected = True
+    DatabaseName = '127.0.0.1/3064:E:\Delphi\DB\cadastros.gdb'
+    Params.Strings = (
+      'user_name=SYSDBA'
+      'password=masterkey')
     LoginPrompt = False
     IdleTimer = 0
     SQLDialect = 3

@@ -1,6 +1,6 @@
 object formMenuPrincipal: TformMenuPrincipal
-  Left = 277
-  Top = 172
+  Left = 278
+  Top = 173
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'Engegraph'
@@ -42,12 +42,14 @@ object formMenuPrincipal: TformMenuPrincipal
         end
         object PessoaseConjuges1: TMenuItem
           Caption = 'Pessoas e Conjuges'
+          OnClick = PessoaseConjuges1Click
         end
       end
       object PessoasVinculadas1: TMenuItem
         Caption = 'Pessoas Jur'#237'dicas'
         object PessoasJuridicas1: TMenuItem
           Caption = 'Pessoas Juridicas'
+          OnClick = PessoasJuridicas1Click
         end
         object FuncionriosVinculados1: TMenuItem
           Caption = 'Funcion'#225'rios Vinculados'
@@ -77,10 +79,11 @@ object formMenuPrincipal: TformMenuPrincipal
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 45058.756368229200000000
-    ReportOptions.LastChange = 45059.497885405090000000
+    ReportOptions.CreateDate = 45060.997142534700000000
+    ReportOptions.LastChange = 45061.022919884260000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
+      ''
       'begin'
       ''
       'end.')
@@ -107,11 +110,115 @@ object formMenuPrincipal: TformMenuPrincipal
       BottomMargin = 10.000000000000000000
       Frame.Typ = []
       MirrorMode = []
+      object Header1: TfrxHeader
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 105.826840000000000000
+        Top = 18.897650000000000000
+        Width = 718.110700000000000000
+        ReprintOnNewPage = True
+        object Memo1: TfrxMemoView
+          AllowVectorExport = True
+          Top = 34.015770000000000000
+          Width = 718.110700000000000000
+          Height = 45.354360000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -27
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          HAlign = haCenter
+          Memo.UTF8 = (
+            'PESSOAS CONJUGES')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo2: TfrxMemoView
+          AllowVectorExport = True
+          Top = 79.370130000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Memo.UTF8 = (
+            'CPF')
+          ParentFont = False
+        end
+        object Memo3: TfrxMemoView
+          AllowVectorExport = True
+          Left = 94.488250000000000000
+          Top = 79.370130000000000000
+          Width = 249.448980000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftTop, ftBottom]
+          Memo.UTF8 = (
+            'NOME')
+          ParentFont = False
+        end
+        object Memo4: TfrxMemoView
+          AllowVectorExport = True
+          Left = 341.937230000000000000
+          Top = 79.370130000000000000
+          Width = 37.795300000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftTop, ftBottom]
+          Memo.UTF8 = (
+            'UF')
+          ParentFont = False
+        end
+        object Memo6: TfrxMemoView
+          AllowVectorExport = True
+          Left = 377.953000000000000000
+          Top = 79.370130000000000000
+          Width = 188.976500000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Memo.UTF8 = (
+            'EMAIL')
+          ParentFont = False
+        end
+        object Memo5: TfrxMemoView
+          AllowVectorExport = True
+          Left = 566.929500000000000000
+          Top = 79.370130000000000000
+          Width = 151.181200000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Memo.UTF8 = (
+            'TELEFONE:')
+          ParentFont = False
+        end
+      end
       object MasterData1: TfrxMasterData
         FillType = ftBrush
         Frame.Typ = []
-        Height = 18.897650000000000000
-        Top = 132.283550000000000000
+        Height = 45.354360000000000000
+        Top = 147.401670000000000000
         Width = 718.110700000000000000
         DataSet = frxCadastro
         DataSetName = 'frxCadastro'
@@ -150,7 +257,7 @@ object formMenuPrincipal: TformMenuPrincipal
         object Memo9: TfrxMemoView
           AllowVectorExport = True
           Left = 341.937230000000000000
-          Width = 41.574830000000000000
+          Width = 37.795300000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -196,55 +303,31 @@ object formMenuPrincipal: TformMenuPrincipal
           ParentFont = False
           VAlign = vaCenter
         end
-      end
-      object Header1: TfrxHeader
-        FillType = ftBrush
-        Frame.Typ = []
-        Height = 90.708720000000000000
-        Top = 18.897650000000000000
-        Width = 718.110700000000000000
-        ReprintOnNewPage = True
-        object Memo1: TfrxMemoView
+        object Memo12: TfrxMemoView
           AllowVectorExport = True
-          Top = 26.456710000000000000
-          Width = 718.110700000000000000
-          Height = 45.354360000000000000
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -27
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = []
-          HAlign = haCenter
-          Memo.UTF8 = (
-            'PESSOAS CADASTRADAS')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo2: TfrxMemoView
-          AllowVectorExport = True
-          Top = 71.811070000000000000
-          Width = 94.488250000000000000
+          Left = 342.157700000000000000
+          Top = 18.897650000000000000
+          Width = 128.504020000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -9
           Font.Name = 'Arial'
           Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Frame.Typ = [ftLeft, ftTop, ftBottom]
           Memo.UTF8 = (
             'CPF:')
           ParentFont = False
         end
-        object Memo3: TfrxMemoView
+        object Memo13: TfrxMemoView
           AllowVectorExport = True
-          Left = 94.488250000000000000
-          Top = 71.811070000000000000
+          Left = 468.661720000000000000
+          Top = 18.897650000000000000
           Width = 249.448980000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -9
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftTop, ftBottom]
@@ -252,11 +335,11 @@ object formMenuPrincipal: TformMenuPrincipal
             'NOME:')
           ParentFont = False
         end
-        object Memo4: TfrxMemoView
+        object Memo14: TfrxMemoView
           AllowVectorExport = True
-          Left = 341.937230000000000000
-          Top = 71.811070000000000000
-          Width = 41.574830000000000000
+          Left = 342.157700000000000000
+          Top = 18.897650000000000000
+          Width = 124.724490000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -264,15 +347,17 @@ object formMenuPrincipal: TformMenuPrincipal
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftTop, ftBottom]
+          HAlign = haRight
           Memo.UTF8 = (
-            'UF')
+            '[frxCadastro."CPF_CONJUGE"]')
           ParentFont = False
+          VAlign = vaBottom
         end
-        object Memo6: TfrxMemoView
+        object Memo15: TfrxMemoView
           AllowVectorExport = True
-          Left = 377.953000000000000000
-          Top = 71.811070000000000000
-          Width = 188.976500000000000000
+          Left = 468.661720000000000000
+          Top = 18.897650000000000000
+          Width = 249.448980000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -280,25 +365,11 @@ object formMenuPrincipal: TformMenuPrincipal
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haRight
           Memo.UTF8 = (
-            'EMAIL:')
+            '[frxCadastro."NOME_CONJUGE"]')
           ParentFont = False
-        end
-        object Memo5: TfrxMemoView
-          AllowVectorExport = True
-          Left = 566.929500000000000000
-          Top = 71.811070000000000000
-          Width = 151.181200000000000000
-          Height = 18.897650000000000000
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          Memo.UTF8 = (
-            'TELEFONE:')
-          ParentFont = False
+          VAlign = vaBottom
         end
       end
     end
@@ -316,7 +387,30 @@ object formMenuPrincipal: TformMenuPrincipal
     Transaction = DM.IBTransaction
     BufferChunks = 1000
     CachedUpdates = False
+    SQL.Strings = (
+      
+        'select p.chave_pessoas, p.cpf, p.nome, p.documento, p.endereco, ' +
+        'p.bairro, p.cidade, p.uf, p.telefone, p.telefone1, p.data_nascim' +
+        'ento,'
+      
+        'p.chave_conjuge, p.sexo, p.cep, p.email, p.NOME_PAI, p.NOME_MAE,' +
+        ' p.observacao, p.naturalidade, p.nacionalidade, p.PAIS, p.orgao_' +
+        'emissor, p.uf_nascimento,'
+      
+        'p.CIDADE_NASCIMENTO, p.PAIS_RESIDENCIA, pc.cpf as cpf_conjuge, p' +
+        'c.nome as nome_conjuge'
+      
+        'from pessoas p left join pessoas pc on p.chave_pessoas = pc.chav' +
+        'e_conjuge where p.chave_conjuge is not null')
     Left = 176
     Top = 40
+  end
+  object frxPessoasJuridicas: TfrxDBDataset
+    UserName = 'frxPessoasJuridicas'
+    CloseDataSource = False
+    DataSet = IBQueryRelatorios
+    BCDToCurrency = False
+    Left = 112
+    Top = 88
   end
 end
