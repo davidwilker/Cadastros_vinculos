@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Menus, uPessoasF, uPJ, uConfigBanco, uDM, IniFiles, DB,
-  IBCustomDataSet, IBQuery, frxClass, frxDBSet, uSobre;
+  IBCustomDataSet, IBQuery, frxClass, frxDBSet, uSobre, VFrames;
 
 type
   TformMenuPrincipal = class(TForm)

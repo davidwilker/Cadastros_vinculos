@@ -1,0 +1,116 @@
+unit uTiraFoto;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls,
+  VFrames, ExtCtrls, Buttons;
+
+type
+  TformTirarFoto = class(TForm)
+    SaveDialog1: TSaveDialog;
+    pbxImage: TPaintBox;
+    Panel1: TPanel;
+    Label1: TLabel;
+    cbxCameras: TComboBox;
+    btnInicia: TBitBtn;
+    btnParar: TBitBtn;
+    btnConfig: TButton;
+    btnSalvar: TBitBtn;
+    cbxResolucao: TComboBox;
+    procedure FormCreate(Sender: TObject);
+    procedure btnIniciaClick(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure btnConfigClick(Sender: TObject);
+    procedure btnPararClick(Sender: TObject);
+  private
+    { Private declarations }
+    fActivated  : boolean;
+    fVideoImage : TVideoImage;
+    fVideoBitmap: TBitmap;
+  public
+    { Public declarations }
+  end;
+
+var
+  formTirarFoto: TformTirarFoto;
+
+implementation
+
+{$R *.dfm}
+
+procedure TformTirarFoto.FormCreate(Sender: TObject);
+begin
+  pbxImage.Align := alClient;
+  fActivated      := false;
+
+  // Cria instância de nossa classe de imagem de vídeo.
+  fVideoImage     := TVideoImage.Create;
+  // Diz ao fVideoImage onde pintar as imagens que recebe da câmera
+  // (Apenas no caso de não querermos modificar as imagens por nós mesmos)
+  fVideoImage.SetDisplayCanvas(pbxImage.Canvas);
+
+  Caption := 'Camera';
+end;
+
+procedure TformTirarFoto.FormActivate(Sender: TObject);
+var
+  DeviceList : TStringList;
+begin
+  IF fActivated then
+    exit;
+  fActivated := true;
+
+
+  // pega lista de cameras disponiveis
+  DeviceList := TStringList.Create;
+  fVideoImage.GetListOfDevices(DeviceList);
+
+  IF DeviceList.Count < 1 then
+    begin
+      // caso não tenha nenhumna camera disponivel
+      Caption := '[Camera não encontrada]';
+      MessageDlg('Camera não conectada.'#10'', mtError, [mbOK], 0);
+      Application.Terminate;
+      exit;
+    end
+    else begin
+      // se ao menos uma camera for encontrada
+      cbxCameras.items.Assign(DeviceList);
+      cbxCameras.ItemIndex := 0;
+      btnInicia.Enabled := true;
+    end;
+end;
+
+procedure TformTirarFoto.btnIniciaClick(Sender: TObject);
+begin
+
+  Screen.Cursor := crHourGlass;
+  btnInicia.Enabled := false;
+  Application.ProcessMessages;
+
+  fVideoImage.VideoStart(cbxCameras.Items[cbxCameras.itemindex]);
+
+  //controla a resolução de partida
+  fVideoImage.SetResolutionByIndex(4);
+
+  btnParar.Enabled  := true;
+  btnConfig.Enabled := true;
+  Screen.Cursor := crDefault;
+end;
+
+procedure TformTirarFoto.btnConfigClick(Sender: TObject);
+begin
+  FVideoImage.ShowProperty_Stream;
+end;
+
+procedure TformTirarFoto.btnPararClick(Sender: TObject);
+begin
+  FVideoImage.VideoStop;
+  btnInicia.Enabled := true;
+  btnConfig.Enabled := false;
+  btnParar.Enabled  := false;
+end;
+
+end.

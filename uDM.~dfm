@@ -1,8 +1,8 @@
 object DM: TDM
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 277
-  Top = 172
+  Left = 278
+  Top = 173
   Height = 433
   Width = 653
   object Conexao: TIBDatabase
@@ -19,7 +19,7 @@ object DM: TDM
     Top = 168
   end
   object IBTransaction: TIBTransaction
-    Active = False
+    Active = True
     DefaultDatabase = Conexao
     AutoStopAction = saNone
     Left = 232

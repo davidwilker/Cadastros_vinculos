@@ -12,10 +12,8 @@ object formPessoasF: TformPessoasF
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  FormStyle = fsStayOnTop
   OldCreateOrder = False
   Position = poScreenCenter
-  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object btnGravar: TSpeedButton
@@ -408,7 +406,7 @@ object formPessoasF: TformPessoasF
       end
       object GroupBox2: TGroupBox
         Left = 0
-        Top = 0
+        Top = 1
         Width = 779
         Height = 49
         Caption = 'Filia'#231#227'o'
@@ -892,6 +890,15 @@ object formPessoasF: TformPessoasF
     Text = '  /  /    '
     OnChange = editDataNascimentoChange
     OnExit = editDataNascimentoExit
+  end
+  object btnTesteCaptura: TButton
+    Left = 584
+    Top = 24
+    Width = 75
+    Height = 25
+    Caption = 'testeCaptura'
+    TabOrder = 4
+    OnClick = btnTesteCapturaClick
   end
   object IBQuery1: TIBQuery
     Database = DM.Conexao

@@ -1,6 +1,6 @@
 object formMenuPrincipal: TformMenuPrincipal
-  Left = 278
-  Top = 173
+  Left = 280
+  Top = 174
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'Engegraph'

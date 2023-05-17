@@ -11,7 +11,8 @@ uses
   uConfigBanco in 'uConfigBanco.pas' {formConfigBanco},
   uFormatacao in 'uFormatacao.pas',
   uPesquisaCnpj in 'uPesquisaCnpj.pas' {formPesquisaCNPJ},
-  uSobre in 'uSobre.pas' {formSobre};
+  uSobre in 'uSobre.pas' {formSobre},
+  uTiraFoto in 'uTiraFoto.pas' {formTirarFoto};
 
 {$R *.res}
 

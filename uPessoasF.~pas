@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Buttons, StdCtrls, uDM, DB, IBCustomDataSet, IBQuery,
   IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient, IdHTTP,
-  xmldom, XMLIntf, msxmldom, XMLDoc, uPesquisaPessoa, uFormatacao, Mask, DateUtils;
+  xmldom, XMLIntf, msxmldom, XMLDoc, uPesquisaPessoa, uFormatacao, Mask, DateUtils, uTiraFoto;
 
 type
   TformPessoasF = class(TForm)
@@ -84,11 +84,11 @@ type
     editCpf: TMaskEdit;
     editCep: TMaskEdit;
     editDataNascimento: TMaskEdit;
+    btnTesteCaptura: TButton;
     procedure btnPessBuscaCpfClick(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
-    procedure FormShow(Sender: TObject);
     procedure editCpfCorretoChange(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
     procedure btnPesquisaCepClick(Sender: TObject);
@@ -99,6 +99,7 @@ type
     procedure editCpfCorretoExit(Sender: TObject);
     procedure editDataNascimentoExit(Sender: TObject);
     procedure editDataNascimentoChange(Sender: TObject);
+    procedure btnTesteCapturaClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -428,14 +429,6 @@ begin
 
 end;
 
-procedure TformPessoasF.FormShow(Sender: TObject);
-begin
-  if (Length(editCpf.Text) >= 11) then
-    begin
-      btnPessBuscaCpf.Enabled := false;
-    end;
-end;
-
 procedure TformPessoasF.editCpfCorretoChange(Sender: TObject);
 begin
   if (Length(editCpf.Text) >= 11) then
@@ -746,6 +739,13 @@ begin
         end;
 
     end;
+
+end;
+
+procedure TformPessoasF.btnTesteCapturaClick(Sender: TObject);
+begin
+  formTirarFoto := TformTirarFoto.Create(Application);
+  formTirarFoto.Show;
 
 end;
 

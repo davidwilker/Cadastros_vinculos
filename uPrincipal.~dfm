@@ -1,6 +1,6 @@
 object formMenuPrincipal: TformMenuPrincipal
-  Left = 278
-  Top = 173
+  Left = 280
+  Top = 174
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'Engegraph'
@@ -80,7 +80,7 @@ object formMenuPrincipal: TformMenuPrincipal
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 45060.997142534700000000
-    ReportOptions.LastChange = 45061.022457893520000000
+    ReportOptions.LastChange = 45061.022919884260000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -113,7 +113,7 @@ object formMenuPrincipal: TformMenuPrincipal
       object Header1: TfrxHeader
         FillType = ftBrush
         Frame.Typ = []
-        Height = 102.047310000000000000
+        Height = 105.826840000000000000
         Top = 18.897650000000000000
         Width = 718.110700000000000000
         ReprintOnNewPage = True
@@ -217,8 +217,8 @@ object formMenuPrincipal: TformMenuPrincipal
       object MasterData1: TfrxMasterData
         FillType = ftBrush
         Frame.Typ = []
-        Height = 41.574830000000000000
-        Top = 143.622140000000000000
+        Height = 45.354360000000000000
+        Top = 147.401670000000000000
         Width = 718.110700000000000000
         DataSet = frxCadastro
         DataSetName = 'frxCadastro'
