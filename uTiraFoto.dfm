@@ -87,6 +87,7 @@ object formTirarFoto: TformTirarFoto
       Caption = 'SALVAR'
       Enabled = False
       TabOrder = 4
+      OnClick = btnSalvarClick
       NumGlyphs = 3
     end
     object cbxResolucao: TComboBox
@@ -102,7 +103,13 @@ object formTirarFoto: TformTirarFoto
   object SaveDialog1: TSaveDialog
     DefaultExt = 'bmp'
     Filter = 'BITMAP|*.bmp'
-    Left = 224
+    Left = 240
     Top = 112
+  end
+  object SavePictureDialog1: TSavePictureDialog
+    DefaultExt = 'bmp'
+    Filter = 'Bitmaps (*.bmp)|*.bmp'
+    Left = 176
+    Top = 104
   end
 end

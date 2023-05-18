@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Buttons, StdCtrls, uDM, DB, IBCustomDataSet, IBQuery,
   IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient, IdHTTP,
-  xmldom, XMLIntf, msxmldom, XMLDoc, uPesquisaPessoa, uFormatacao, Mask, DateUtils, uTiraFoto;
+  xmldom, XMLIntf, msxmldom, XMLDoc, uPesquisaPessoa, uFormatacao, Mask, DateUtils, uTiraFoto,
+  ExtCtrls;
 
 type
   TformPessoasF = class(TForm)
@@ -84,7 +85,7 @@ type
     editCpf: TMaskEdit;
     editCep: TMaskEdit;
     editDataNascimento: TMaskEdit;
-    btnTesteCaptura: TButton;
+    imgFotoCadastroF: TImage;
     procedure btnPessBuscaCpfClick(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
@@ -99,7 +100,7 @@ type
     procedure editCpfCorretoExit(Sender: TObject);
     procedure editDataNascimentoExit(Sender: TObject);
     procedure editDataNascimentoChange(Sender: TObject);
-    procedure btnTesteCapturaClick(Sender: TObject);
+    procedure imgFotoCadastroFDblClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -119,123 +120,134 @@ implementation
 procedure TformPessoasF.btnPessBuscaCpfClick(Sender: TObject);
 begin
 
-  IBQuery1.Close;
-  IBQuery1.SQL.Clear;
-  IBQuery1.SQL.Add('select p.chave_pessoas, p.cpf, p.nome, p.documento, p.endereco, p.bairro, p.cidade, p.uf, p.telefone, p.telefone1, p.data_nascimento,');
-  IBQuery1.SQL.Add('p.chave_conjuge, p.sexo, p.cep, p.email, p.NOME_PAI, p.NOME_MAE, p.observacao, p.naturalidade, p.nacionalidade, p.PAIS, p.orgao_emissor, p.uf_nascimento,');
-  IBQuery1.SQL.Add('p.CIDADE_NASCIMENTO, p.PAIS_RESIDENCIA, pc.cpf as cpf_conjuge, pc.nome as nome_conjuge');
-  IBQuery1.SQL.Add('from pessoas p left join pessoas pc on p.chave_pessoas = pc.chave_conjuge where p.cpf = '+ editCpf.Text);
-  IBQuery1.Open;
-
-  editPassNome.Text       := varToStr(IBQuery1.FieldValues['nome']);
-  lblChavePessoa.Caption  := varToStr(IBQuery1.FieldValues['chave_pessoas']);
-
-  if (editCpf.Text = '') then
-    begin
-      ShowMessage('Preencha o campo CPF antes de prosseguir!');
-    end
-  else if (lblChavePessoa.Caption <> '') then
+  if (Length(editCpf.Text) = 11) then
     begin
 
-      //lblChavePessoa.Caption  := varToStr(IBQuery1.FieldValues['chave_pessoas']);
-      editPassNome.Text := varToStr(IBQuery1.FieldValues['nome']);
+      IBQuery1.Close;
+      IBQuery1.SQL.Clear;
+      IBQuery1.SQL.Add('select p.chave_pessoas, p.cpf, p.nome, p.documento, p.endereco, p.bairro, p.cidade, p.uf, p.telefone, p.telefone1, p.data_nascimento,');
+      IBQuery1.SQL.Add('p.chave_conjuge, p.sexo, p.cep, p.email, p.NOME_PAI, p.NOME_MAE, p.observacao, p.naturalidade, p.nacionalidade, p.PAIS, p.orgao_emissor, p.uf_nascimento,');
+      IBQuery1.SQL.Add('p.CIDADE_NASCIMENTO, p.PAIS_RESIDENCIA, pc.cpf as cpf_conjuge, pc.nome as nome_conjuge');
+      IBQuery1.SQL.Add('from pessoas p left join pessoas pc on p.chave_pessoas = pc.chave_conjuge where p.cpf = '+ editCpf.Text);
+      IBQuery1.Open;
+
       editPassNome.Text       := varToStr(IBQuery1.FieldValues['nome']);
-      editDataNascimento.Text := varToStr(IBQuery1.FieldValues['data_nascimento']);
+      lblChavePessoa.Caption  := varToStr(IBQuery1.FieldValues['chave_pessoas']);
 
-      cbxSexo.ItemIndex       := cbxSexo.Items.IndexOf(varToStr(IBQuery1.FieldValues['sexo']));
+        if (lblChavePessoa.Caption <> '') then
+          begin
 
-      editDocumento.Text      := varToStr(IBQuery1.FieldValues['documento']);
-      editOrgEmissor.Text     := varToStr(IBQuery1.FieldValues['orgao_emissor']);
-      editNacionalidade.Text  := varToStr(IBQuery1.FieldValues['nacionalidade']);
+            //lblChavePessoa.Caption  := varToStr(IBQuery1.FieldValues['chave_pessoas']);
+            editPassNome.Text := varToStr(IBQuery1.FieldValues['nome']);
+            editPassNome.Text       := varToStr(IBQuery1.FieldValues['nome']);
+            editDataNascimento.Text := varToStr(IBQuery1.FieldValues['data_nascimento']);
 
-      cbxEstadoNascido.ItemIndex := cbxEstadoNascido.Items.IndexOf(varToStr(IBQuery1.FieldValues['uf_nascimento']));
+            cbxSexo.ItemIndex       := cbxSexo.Items.IndexOf(varToStr(IBQuery1.FieldValues['sexo']));
 
-      editNaturalidade.Text   := varToStr(IBQuery1.FieldValues['naturalidade']);
-      editPai.Text            := varToStr(IBQuery1.FieldValues['nome_pai']);
-      editMae.Text            := varToStr(IBQuery1.FieldValues['nome_mae']);
-      editEndereco.Text       := varToStr(IBQuery1.FieldValues['endereco']);
-      editCep.Text            := varToStr(IBQuery1.FieldValues['cep']);
-      editBairro.Text         := varToStr(IBQuery1.FieldValues['bairro']);
-      editCidadeEndereco.Text := varToStr(IBQuery1.FieldValues['cidade']);
+            editDocumento.Text      := varToStr(IBQuery1.FieldValues['documento']);
+            editOrgEmissor.Text     := varToStr(IBQuery1.FieldValues['orgao_emissor']);
+            editNacionalidade.Text  := varToStr(IBQuery1.FieldValues['nacionalidade']);
 
-      cbxEstadoEndereco.ItemIndex := cbxEstadoEndereco.Items.IndexOf(varToStr(IBQuery1.FieldValues['uf']));
+            cbxEstadoNascido.ItemIndex := cbxEstadoNascido.Items.IndexOf(varToStr(IBQuery1.FieldValues['uf_nascimento']));
 
-      editTelefone.Text       := varToStr(IBQuery1.FieldValues['telefone']);
-      editTelefone2.Text      := varToStr(IBQuery1.FieldValues['telefone1']);
-      editPaisEndereco.Text   := varToStr(IBQuery1.FieldValues['pais']);
-      editEmail.Text          := varToStr(IBQuery1.FieldValues['email']);
-      editObs.Text            := varToStr(IBQuery1.FieldValues['observacao']);
-      editCpfConjuge.Text     := varToStr(IBQuery1.FieldValues['cpf_conjuge']);
-      editNomeConjuge.Text    := varToStr(IBQuery1.FieldValues['nome_conjuge']);
+            editNaturalidade.Text   := varToStr(IBQuery1.FieldValues['naturalidade']);
+            editPai.Text            := varToStr(IBQuery1.FieldValues['nome_pai']);
+            editMae.Text            := varToStr(IBQuery1.FieldValues['nome_mae']);
+            editEndereco.Text       := varToStr(IBQuery1.FieldValues['endereco']);
+            editCep.Text            := varToStr(IBQuery1.FieldValues['cep']);
+            editBairro.Text         := varToStr(IBQuery1.FieldValues['bairro']);
+            editCidadeEndereco.Text := varToStr(IBQuery1.FieldValues['cidade']);
 
-      btnAlterar.Enabled      := true;
-      btnExcluir.Enabled      := true;
-      btnPessBuscaCpf.Enabled := false;
+            cbxEstadoEndereco.ItemIndex := cbxEstadoEndereco.Items.IndexOf(varToStr(IBQuery1.FieldValues['uf']));
+
+            editTelefone.Text       := varToStr(IBQuery1.FieldValues['telefone']);
+            editTelefone2.Text      := varToStr(IBQuery1.FieldValues['telefone1']);
+            editPaisEndereco.Text   := varToStr(IBQuery1.FieldValues['pais']);
+            editEmail.Text          := varToStr(IBQuery1.FieldValues['email']);
+            editObs.Text            := varToStr(IBQuery1.FieldValues['observacao']);
+            editCpfConjuge.Text     := varToStr(IBQuery1.FieldValues['cpf_conjuge']);
+            editNomeConjuge.Text    := varToStr(IBQuery1.FieldValues['nome_conjuge']);
+
+            btnAlterar.Enabled       := true;
+            btnExcluir.Enabled       := true;
+
+            imgFotoCadastroF.Enabled := true;
+
+            if  FileExists(ExtractFilePath(Application.ExeName)+'\GED\PESSOASF\'+formPessoasF.lblChavePessoa.Caption+ 'F.bmp') then
+              begin
+                imgFotoCadastroF.Picture.LoadFromFile(ExtractFilePath(Application.ExeName)+'\GED\PESSOASF\'+lblChavePessoa.Caption+ 'F.bmp');
+              end
+            else
+              begin
+                imgFotoCadastroF.Picture.LoadFromFile(ExtractFilePath(Application.ExeName)+'\embranco.bmp');
+              end;
+
+          end
+        else if (lblChavePessoa.Caption = '') then
+          begin
+
+            resultadoCadastro :=  MessageDlg('CPF não encontrador, deseja incluir?', mtConfirmation, [mbYes, mbNo], 0);
+
+            if (resultadoCadastro = 6) then
+              begin
+                  editPassNome.ReadOnly           := false;
+                  editDataNascimento.ReadOnly     := false;
+                  cbxSexo.enabled                 := true;
+                  editDocumento.ReadOnly          := false;
+                  editOrgEmissor.ReadOnly         := false;
+                  editNacionalidade.ReadOnly      := false;
+                  cbxEstadoNascido.enabled        := true;
+                  editNaturalidade.ReadOnly       := false;
+                  editPai.ReadOnly                := false;
+                  editMae.ReadOnly                := false;
+                  editEndereco.ReadOnly           := false;
+                  editCep.ReadOnly                := false;
+                  editBairro.ReadOnly             := false;
+                  editCidadeEndereco.ReadOnly     := false;
+                  cbxEstadoEndereco.enabled       := true;
+                  editTelefone.ReadOnly           := false;
+                  editTelefone2.ReadOnly          := false;
+                  editPaisEndereco.ReadOnly       := false;
+                  editEmail.ReadOnly              := false;
+                  editObs.ReadOnly                := false;
+
+                  editPassNome.Color           := clWindow;
+                  editDataNascimento.Color     := clWindow;
+                  cbxSexo.Color                := clWindow;
+                  editDocumento.Color          := clWindow;
+                  editOrgEmissor.Color         := clWindow;
+                  editNacionalidade.Color      := clWindow;
+                  cbxEstadoNascido.Color       := clWindow;
+                  editNaturalidade.Color       := clWindow;
+                  editPai.Color                := clWindow;
+                  editMae.Color                := clWindow;
+                  editEndereco.Color           := clWindow;
+                  editCep.Color                := clWindow;
+                  editBairro.Color             := clWindow;
+                  editCidadeEndereco.Color     := clWindow;
+                  cbxEstadoEndereco.Color      := clWindow;
+                  editTelefone.Color           := clWindow;
+                  editTelefone2.Color          := clWindow;
+                  editPaisEndereco.Color       := clWindow;
+                  editEmail.Color              := clWindow;
+                  editObs.Color                := clWindow;
+
+                  btnGravar.Enabled            := true;
+                  btnCancelar.Enabled          := true;
+                  btnPesquisaCep.Enabled       := true;
+                  btnAlterar.Enabled           := false;
+                  btnPessBuscaCpf.Enabled      := false;
+                  btnExcluir.Enabled           := false;
+                  lblChavePessoa.Caption       := '';
+
+              end
+          end;
 
     end
-  else if (lblChavePessoa.Caption = '') then
+  else
     begin
-
-      resultadoCadastro :=  MessageDlg('CPF não encontrador, deseja incluir?', mtConfirmation, [mbYes, mbNo], 0);
-
-      if (resultadoCadastro = 6) then
-        begin
-            editPassNome.ReadOnly           := false;
-            editDataNascimento.ReadOnly     := false;
-            cbxSexo.enabled                 := true;
-            editDocumento.ReadOnly          := false;
-            editOrgEmissor.ReadOnly         := false;
-            editNacionalidade.ReadOnly      := false;
-            cbxEstadoNascido.enabled        := true;
-            editNaturalidade.ReadOnly       := false;
-            editPai.ReadOnly                := false;
-            editMae.ReadOnly                := false;
-            editEndereco.ReadOnly           := false;
-            editCep.ReadOnly                := false;
-            editBairro.ReadOnly             := false;
-            editCidadeEndereco.ReadOnly     := false;
-            cbxEstadoEndereco.enabled       := true;
-            editTelefone.ReadOnly           := false;
-            editTelefone2.ReadOnly          := false;
-            editPaisEndereco.ReadOnly       := false;
-            editEmail.ReadOnly              := false;
-            editObs.ReadOnly                := false;
-
-            editPassNome.Color           := clWindow;
-            editDataNascimento.Color     := clWindow;
-            cbxSexo.Color                := clWindow;
-            editDocumento.Color          := clWindow;
-            editOrgEmissor.Color         := clWindow;
-            editNacionalidade.Color      := clWindow;
-            cbxEstadoNascido.Color       := clWindow;
-            editNaturalidade.Color       := clWindow;
-            editPai.Color                := clWindow;
-            editMae.Color                := clWindow;
-            editEndereco.Color           := clWindow;
-            editCep.Color                := clWindow;
-            editBairro.Color             := clWindow;
-            editCidadeEndereco.Color     := clWindow;
-            cbxEstadoEndereco.Color      := clWindow;
-            editTelefone.Color           := clWindow;
-            editTelefone2.Color          := clWindow;
-            editPaisEndereco.Color       := clWindow;
-            editEmail.Color              := clWindow;
-            editObs.Color                := clWindow;
-
-            btnGravar.Enabled            := true;
-            btnCancelar.Enabled          := true;
-            btnPesquisaCep.Enabled       := true;
-            btnAlterar.Enabled           := false;
-            btnPessBuscaCpf.Enabled      := false;
-            btnExcluir.Enabled           := false;
-            lblChavePessoa.Caption       := '';
-
-        end
-      else
-        begin
-          
-        end;
-    end;
+      ShowMessage('Preencha o campo CPF');
+    end
 
 end;
 
@@ -426,6 +438,15 @@ begin
   editObs.Text            := varToStr(IBQuery1.FieldValues['observacao']);
   editCpfConjuge.Text     := varToStr(IBQuery1.FieldValues['cpf_conjuge']);
   editNomeConjuge.Text    := varToStr(IBQuery1.FieldValues['nome_conjuge']);
+
+  if  FileExists(ExtractFilePath(Application.ExeName)+'\GED\PESSOASF\'+formPessoasF.lblChavePessoa.Caption+ 'F.bmp') then
+    begin
+      imgFotoCadastroF.Picture.LoadFromFile(ExtractFilePath(Application.ExeName)+'\GED\PESSOASF\'+lblChavePessoa.Caption+ 'F.bmp');
+    end
+  else
+    begin
+      imgFotoCadastroF.Picture.LoadFromFile(ExtractFilePath(Application.ExeName)+'\embranco.bmp');
+    end;
 
 end;
 
@@ -742,11 +763,10 @@ begin
 
 end;
 
-procedure TformPessoasF.btnTesteCapturaClick(Sender: TObject);
+procedure TformPessoasF.imgFotoCadastroFDblClick(Sender: TObject);
 begin
   formTirarFoto := TformTirarFoto.Create(Application);
   formTirarFoto.Show;
-
 end;
 
 end.

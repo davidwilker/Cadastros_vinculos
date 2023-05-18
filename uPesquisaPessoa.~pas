@@ -14,7 +14,7 @@ type
     editPesquisa: TEdit;
     Label1: TLabel;
     rdbNome: TRadioButton;
-    RdbCpf: TRadioButton;
+    rdbCpf: TRadioButton;
     procedure editPesquisaChange(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -37,12 +37,12 @@ uses
 procedure TformPesquisaPessoa.editPesquisaChange(Sender: TObject);
 begin
 
-  if(RdbCpf.Checked = true) then
+  if(rdbCpf.Checked = true) then
     begin
         IBQuery.Close;
         IBQuery.SQL.Clear;
         IBQuery.SQL.Add('select chave_pessoas, cpf, nome ');
-        IBQuery.SQL.Add('from pessoas where cpf like '''+editPesquisa.Text+'%'' order by nome');
+        IBQuery.SQL.Add('from pessoas where cpf like ''%'+editPesquisa.Text+'%'' order by nome');
         IBQuery.Open;
     end
   else
@@ -104,6 +104,16 @@ begin
 
   formPesquisaPessoa.Close;
 
+  imgFotoCadastroF.Enabled := true;
+
+  if  FileExists(ExtractFilePath(Application.ExeName)+'\GED\PESSOASF\'+formPessoasF.lblChavePessoa.Caption+ 'F.bmp') then
+    begin
+      formPessoasF.imgFotoCadastroF.Picture.LoadFromFile(ExtractFilePath(Application.ExeName)+'\GED\PESSOASF\'+formPessoasF.lblChavePessoa.Caption+ 'F.bmp')
+    end
+  else
+    begin
+      formPessoasF.imgFotoCadastroF.Picture.LoadFromFile(ExtractFilePath(Application.ExeName)+'\embranco.bmp');
+    end;
 end;
 
 procedure TformPesquisaPessoa.FormCreate(Sender: TObject);

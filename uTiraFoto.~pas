@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls,
-  VFrames, ExtCtrls, Buttons;
+  VFrames, ExtCtrls, Buttons, ExtDlgs;
 
 type
   TformTirarFoto = class(TForm)
@@ -19,11 +19,13 @@ type
     btnConfig: TButton;
     btnSalvar: TBitBtn;
     cbxResolucao: TComboBox;
+    SavePictureDialog1: TSavePictureDialog;
     procedure FormCreate(Sender: TObject);
     procedure btnIniciaClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure btnConfigClick(Sender: TObject);
     procedure btnPararClick(Sender: TObject);
+    procedure btnSalvarClick(Sender: TObject);
   private
     { Private declarations }
     fActivated  : boolean;
@@ -38,12 +40,16 @@ var
 
 implementation
 
+uses
+  uPessoasF;
+
 {$R *.dfm}
 
 procedure TformTirarFoto.FormCreate(Sender: TObject);
 begin
   pbxImage.Align := alClient;
   fActivated      := false;
+  fVideoBitmap    := TBitmap.create;
 
   // Cria instância de nossa classe de imagem de vídeo.
   fVideoImage     := TVideoImage.Create;
@@ -98,6 +104,7 @@ begin
   btnParar.Enabled  := true;
   btnConfig.Enabled := true;
   Screen.Cursor := crDefault;
+
 end;
 
 procedure TformTirarFoto.btnConfigClick(Sender: TObject);
@@ -111,6 +118,38 @@ begin
   btnInicia.Enabled := true;
   btnConfig.Enabled := false;
   btnParar.Enabled  := false;
+  btnSalvar.Enabled := true;
+  fVideoImage.GetBitmap(fVideoBitmap);
+end;
+
+procedure TformTirarFoto.btnSalvarClick(Sender: TObject);
+VAR
+  BMP : TBitmap;
+begin
+  BMP := TBitmap.Create;
+  BMP.Assign(fVideoBitmap);
+
+  try
+    //BMP.SaveToFile(SavePictureDialog1.FileName);
+
+    BMP.SaveToFile(ExtractFilePath(Application.ExeName)+'\GED\PESSOASF\'+formPessoasF.lblChavePessoa.Caption+ 'F.bmp');
+    if  FileExists(ExtractFilePath(Application.ExeName)+'\GED\PESSOASF\'+formPessoasF.lblChavePessoa.Caption+ 'F.bmp') then
+      begin
+        formPessoasF.imgFotoCadastroF.Picture.LoadFromFile(ExtractFilePath(Application.ExeName)+'\GED\PESSOASF\'+formPessoasF.lblChavePessoa.Caption+ 'F.bmp')
+      end
+    else
+      begin
+        formPessoasF.imgFotoCadastroF.Picture.LoadFromFile(ExtractFilePath(Application.ExeName)+'\embranco.bmp');
+      end;
+
+    formTirarFoto.Close;
+
+  except
+    MessageDlg('Não foi possível salvar a imagem ' + ExtractFilePath(Application.ExeName)+'\GED\PESSOASF\', mterror, [mbOK], 0);
+  end;
+  
+  BMP.Free;
+
 end;
 
 end.

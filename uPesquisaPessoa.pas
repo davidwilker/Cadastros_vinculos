@@ -104,6 +104,16 @@ begin
 
   formPesquisaPessoa.Close;
 
+  formPessoasF.imgFotoCadastroF.Enabled := true;
+
+  if  FileExists(ExtractFilePath(Application.ExeName)+'\GED\PESSOASF\'+formPessoasF.lblChavePessoa.Caption+ 'F.bmp') then
+    begin
+      formPessoasF.imgFotoCadastroF.Picture.LoadFromFile(ExtractFilePath(Application.ExeName)+'\GED\PESSOASF\'+formPessoasF.lblChavePessoa.Caption+ 'F.bmp')
+    end
+  else
+    begin
+      formPessoasF.imgFotoCadastroF.Picture.LoadFromFile(ExtractFilePath(Application.ExeName)+'\embranco.bmp');
+    end;
 end;
 
 procedure TformPesquisaPessoa.FormCreate(Sender: TObject);

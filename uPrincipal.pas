@@ -28,6 +28,7 @@ type
     PessoasJuridicas1: TMenuItem;
     FuncionriosVinculados1: TMenuItem;
     frxPessoasJuridicas: TfrxDBDataset;
+    frxPessoasVinculos: TfrxDBDataset;
     procedure PessoaFsica1Click(Sender: TObject);
     procedure PessoaJuridica1Click(Sender: TObject);
     procedure ConfigBancoDeDadosClick(Sender: TObject);
@@ -35,6 +36,7 @@ type
     procedure Sobre1Click(Sender: TObject);
     procedure PessoaseConjuges1Click(Sender: TObject);
     procedure PessoasJuridicas1Click(Sender: TObject);
+    procedure FuncionriosVinculados1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -109,6 +111,19 @@ begin
   IBQueryRelatorios.Open;
 
   Relatorio.LoadFromFile(ExtractFilePath(Application.ExeName) +'\Templates\PESSOAS_JURIDICAS.fr3');
+  Relatorio.ShowReport();
+end;
+
+procedure TformMenuPrincipal.FuncionriosVinculados1Click(Sender: TObject);
+begin
+  IBQueryRelatorios.Close;
+  IBQueryRelatorios.SQL.Clear;
+  IBQueryRelatorios.SQL.Add('select p.nome, p.cpf, pj.RAZAo_SOCIAL, pj.CNPJ, pv.funcao from pessoas_vinculos pv inner join pessoas p');
+  IBQueryRelatorios.SQL.Add('on p.chave_pessoas = pv.chave_pessoas inner join pessoas_juridicas pj');
+  IBQueryRelatorios.SQL.Add('on pv.chave_pessoas_juridicas = pj.chave_pessoas_juridicas ORDER BY PJ.RAZAO_SOCIAL');
+  IBQueryRelatorios.Open;
+
+  Relatorio.LoadFromFile(ExtractFilePath(Application.ExeName) +'\Templates\FUNCIONARIOS_VINCULADOS.fr3');
   Relatorio.ShowReport();
 end;
 

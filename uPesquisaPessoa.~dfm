@@ -75,7 +75,7 @@ object formPesquisaPessoa: TformPesquisaPessoa
     TabOrder = 2
     TabStop = True
   end
-  object RdbCpf: TRadioButton
+  object rdbCpf: TRadioButton
     Left = 171
     Top = 28
     Width = 46

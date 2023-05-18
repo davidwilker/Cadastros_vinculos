@@ -4,7 +4,7 @@ object formPessoasF: TformPessoasF
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Cadastro Pessoa F'#237'sica'
-  ClientHeight = 596
+  ClientHeight = 645
   ClientWidth = 816
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -92,7 +92,7 @@ object formPessoasF: TformPessoasF
       CharCase = ecUpperCase
       Color = cl3DLight
       ReadOnly = True
-      TabOrder = 0
+      TabOrder = 1
     end
     object editCpf: TMaskEdit
       Left = 8
@@ -101,14 +101,14 @@ object formPessoasF: TformPessoasF
       Height = 21
       EditMask = '000\.000\.000\-00;0;_'
       MaxLength = 14
-      TabOrder = 1
+      TabOrder = 0
     end
   end
   object gpPessoa: TGroupBox
     Left = 16
     Top = 119
     Width = 785
-    Height = 393
+    Height = 466
     Caption = 'Pessoa F'#237'sica'
     TabOrder = 1
     object Label1: TLabel
@@ -240,6 +240,16 @@ object formPessoasF: TformPessoasF
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
       ParentFont = False
+    end
+    object imgFotoCadastroF: TImage
+      Left = 504
+      Top = 280
+      Width = 273
+      Height = 177
+      Cursor = crHandPoint
+      Center = True
+      Enabled = False
+      OnDblClick = imgFotoCadastroFDblClick
     end
     object editIdade: TEdit
       Left = 240
@@ -406,7 +416,7 @@ object formPessoasF: TformPessoasF
       end
       object GroupBox2: TGroupBox
         Left = 0
-        Top = 1
+        Top = 0
         Width = 779
         Height = 49
         Caption = 'Filia'#231#227'o'
@@ -461,7 +471,7 @@ object formPessoasF: TformPessoasF
       Left = 3
       Top = 157
       Width = 779
-      Height = 124
+      Height = 119
       Caption = 'Endere'#231'o'
       TabOrder = 10
       object Label13: TLabel
@@ -707,16 +717,16 @@ object formPessoasF: TformPessoasF
     end
     object gpObservacoes: TGroupBox
       Left = 4
-      Top = 286
-      Width = 777
-      Height = 97
+      Top = 277
+      Width = 493
+      Height = 180
       Caption = 'Observa'#231#227'o'
       TabOrder = 11
       object editObs: TMemo
         Left = 5
         Top = 16
-        Width = 766
-        Height = 75
+        Width = 484
+        Height = 158
         Color = cl3DLight
         ReadOnly = True
         TabOrder = 0
@@ -725,7 +735,7 @@ object formPessoasF: TformPessoasF
   end
   object gpConjuge: TGroupBox
     Left = 16
-    Top = 519
+    Top = 585
     Width = 785
     Height = 49
     Caption = 'Conjuge'
@@ -890,15 +900,6 @@ object formPessoasF: TformPessoasF
     Text = '  /  /    '
     OnChange = editDataNascimentoChange
     OnExit = editDataNascimentoExit
-  end
-  object btnTesteCaptura: TButton
-    Left = 584
-    Top = 24
-    Width = 75
-    Height = 25
-    Caption = 'testeCaptura'
-    TabOrder = 4
-    OnClick = btnTesteCapturaClick
   end
   object IBQuery1: TIBQuery
     Database = DM.Conexao

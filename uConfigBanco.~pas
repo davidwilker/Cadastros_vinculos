@@ -112,7 +112,7 @@ begin
 
   if(editCaminhoDB.Text = arqIni.ReadString('PARAMETROS','LOCAL',''))then
     begin
-      formConfigBanco.Show;
+      formConfigBanco.Close;
     end
   else
     begin
