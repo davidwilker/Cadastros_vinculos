@@ -1,6 +1,6 @@
 object formPessoasF: TformPessoasF
-  Left = 278
-  Top = 141
+  Left = 228
+  Top = 145
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Cadastro Pessoa F'#237'sica'

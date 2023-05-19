@@ -1,8 +1,8 @@
 object formTirarFoto: TformTirarFoto
   Left = 192
   Top = 125
-  AutoScroll = False
   BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
   Caption = 'Tirar Foto'
   ClientHeight = 311
   ClientWidth = 318
@@ -99,12 +99,6 @@ object formTirarFoto: TformTirarFoto
       ItemHeight = 13
       TabOrder = 5
     end
-  end
-  object SaveDialog1: TSaveDialog
-    DefaultExt = 'bmp'
-    Filter = 'BITMAP|*.bmp'
-    Left = 240
-    Top = 112
   end
   object SavePictureDialog1: TSavePictureDialog
     DefaultExt = 'bmp'

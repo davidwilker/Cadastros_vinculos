@@ -1,10 +1,11 @@
 object formConfigBanco: TformConfigBanco
   Left = 192
   Top = 125
-  Width = 866
-  Height = 273
   BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
   Caption = 'Configura'#231#227'o de Servidor'
+  ClientHeight = 234
+  ClientWidth = 850
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

@@ -140,7 +140,7 @@ begin
             end;
 
           DM.IBDatabase.SQLDialect := 3;
-          DM.IBDatabase.DatabaseName := ExtractFilePath(Application.ExeName) +'DB\CADASTROS.GDB';
+          DM.IBDatabase.DatabaseName := editServidorDB.Text +'/'+editPortaDB.Text+':'+ExtractFilePath(Application.ExeName) +'DB\CADASTROS.GDB';
           DM.IBDatabase.Params.Clear;
           DM.IBDatabase.Params.Add('USER ''SYSDBA''');
           DM.IBDatabase.Params.Add('PASSWORD ''masterkey''');
@@ -153,7 +153,7 @@ begin
           dm.IBDatabase.Params.Clear;
           dm.IBDatabase.Params.Add('user_name='+editLoginDB.Text);
           dm.IBDatabase.Params.Add('password='+editSenhaDB.Text);
-          DM.IBDatabase.DatabaseName := editServidorDB.Text +'/'+editPortaDB.Text+':'+ExtractFilePath(Application.ExeName) +'DB\CADASTROS.GDB';
+          DM.IBDatabase.DatabaseName := editServidorDB.Text +'/'+editPortaDB.Text+':'+ExtractFilePath(Application.ExeName) +'\DB\CADASTROS.GDB';
 
           dm.IBDatabase.Connected := true;
 

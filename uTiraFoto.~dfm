@@ -100,12 +100,6 @@ object formTirarFoto: TformTirarFoto
       TabOrder = 5
     end
   end
-  object SaveDialog1: TSaveDialog
-    DefaultExt = 'bmp'
-    Filter = 'BITMAP|*.bmp'
-    Left = 240
-    Top = 112
-  end
   object SavePictureDialog1: TSavePictureDialog
     DefaultExt = 'bmp'
     Filter = 'Bitmaps (*.bmp)|*.bmp'

@@ -25,9 +25,6 @@ object DM: TDM
     Top = 168
   end
   object IBDatabase: TIBDatabase
-    Params.Strings = (
-      'user_name=SYSDBA'
-      'password=masterkey')
     LoginPrompt = False
     IdleTimer = 0
     SQLDialect = 3

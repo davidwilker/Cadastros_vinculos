@@ -9,7 +9,6 @@ uses
 
 type
   TformTirarFoto = class(TForm)
-    SaveDialog1: TSaveDialog;
     pbxImage: TPaintBox;
     Panel1: TPanel;
     Label1: TLabel;
@@ -130,12 +129,16 @@ begin
   BMP.Assign(fVideoBitmap);
 
   try
-    //BMP.SaveToFile(SavePictureDialog1.FileName);
+
+    if not DirectoryExists(ExtractFilePath(Application.ExeName) +'\GED\PESSOASF') then
+    begin
+      ForceDirectories(ExtractFilePath(Application.ExeName) +'\GED\PESSOASF');
+    end;
 
     BMP.SaveToFile(ExtractFilePath(Application.ExeName)+'\GED\PESSOASF\'+formPessoasF.lblChavePessoa.Caption+ 'F.bmp');
     if  FileExists(ExtractFilePath(Application.ExeName)+'\GED\PESSOASF\'+formPessoasF.lblChavePessoa.Caption+ 'F.bmp') then
       begin
-        formPessoasF.imgFotoCadastroF.Picture.LoadFromFile(ExtractFilePath(Application.ExeName)+'\GED\PESSOASF\'+formPessoasF.lblChavePessoa.Caption+ 'F.bmp')
+        formPessoasF.imgFotoCadastroF.Picture.LoadFromFile(ExtractFilePath(Application.ExeName)+'\GED\PESSOASF\'+formPessoasF.lblChavePessoa.Caption+ 'F.bmp');
       end
     else
       begin
@@ -145,7 +148,7 @@ begin
     formTirarFoto.Close;
 
   except
-    MessageDlg('Não foi possível salvar a imagem ' + ExtractFilePath(Application.ExeName)+'\GED\PESSOASF\', mterror, [mbOK], 0);
+    MessageDlg('Não foi possível salvar a imagem ' + ExtractFilePath(Application.ExeName)+'GED\PESSOASF\', mterror, [mbOK], 0);
   end;
   
   BMP.Free;
